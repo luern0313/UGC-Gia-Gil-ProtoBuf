@@ -1,0 +1,61 @@
+// 资产Proto结构定义
+
+syntax = "proto3";
+
+package game.gia.asset;
+
+import "entity.proto";
+
+
+// 资产
+message Asset {
+    AssetMeta meta = 1;                       // 资产元信息
+    repeated AssetMeta dependent_assets = 2;  // 依赖的资产
+    string name = 3;                          // 资产名称
+    AssetType type = 5;                       // 资产类型
+
+    oneof value {
+        entity.Entity entity_data = 12;       // 实体详细数据 type: 3
+        // 地形 16
+        // 玩家模板 11
+        // 职业模板、环境配置 15
+        // 镜头 17
+        // 布局 19
+        // 预设点 18
+        // 单位标签 26
+    }
+
+    // 资产类型
+    enum AssetType {
+        UNKNOWN = 0;
+        ENTITY = 3;                           // 实体
+        TERRAIN = 5;                          // 地形
+        PLAYER_TEMPLATE = 18;                 // 玩家模板
+        PROFESSION_TEMPLATE = 17;             // 职业模板
+        CAMERA = 13;                          // 镜头
+        LAYOUT = 20;                          // 布局
+        PRESET_POINT = 6;                     // 预设点
+        UNIT_TAG = 44;                        // 单位标签
+        ENVIRONMENT_CONFIGURATION = 49;       //环境配置
+    }
+}
+
+// 资产元信息
+message AssetMeta {
+    int32 field_2 = 2;                        // 未知字段 (实体固定为1)
+    AssetMetaType meta_type = 3;              // 资产元类型 不同于Asset.type？
+    int32 asset_id = 4;                       // 资产ID
+
+    // 资产元类型 不同于Asset.AssetType？
+    enum AssetMetaType {
+        CAMERA = 0;                           // 镜头
+        ENTITY = 2;                           // 实体
+        TERRAIN = 5;                          // 地形
+        PLAYER_TEMPLATE = 1;                  // 玩家模板
+        PROFESSION_TEMPLATE = 3;              // 职业模板、环境配置
+        LAYOUT = 8;                           // 布局
+        PRESET_POINT = 9;                     // 预设点
+        UNIT_TAG = 23;                        // 单位标签
+        ENVIRONMENT_CONFIGURATION = 49;       // 环境配置
+    }
+}

@@ -1,0 +1,13 @@
+// GIA文件Proto结构定义
+
+syntax = "proto3";
+
+package game.gia;
+
+import "asset.proto";
+
+
+// GIA文件
+message GIACollection {
+    repeated game.gia.asset.Asset Assets = 1;     // 资产列表
+}
