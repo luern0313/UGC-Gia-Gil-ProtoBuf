@@ -5,6 +5,7 @@ syntax = "proto3";
 package game.gia.asset;
 
 import "entity.proto";
+import "camera.proto";
 
 
 // 资产
@@ -19,7 +20,7 @@ message Asset {
         // 地形 16
         // 玩家模板 11
         // 职业模板、环境配置 15
-        // 镜头 17
+        camera.CameraConfig camera_config = 17; // 镜头配置
         // 布局 19
         // 预设点 18
         // 单位标签 26
