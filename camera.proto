@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package game.gia.camera;
+
+// 镜头配置
+message CameraConfig {
+    repeated CameraDetail camera_details = 1; // 镜头详情列表
+}
+
+// 镜头详情
+message CameraDetail {
+    uint32 camera_id = 1;                 // 镜头ID
+    CameraData camera_data = 2;           // 镜头数据
+}
+
+// 镜头数据
+message CameraData {
+    string name = 1;                      // 镜头名称
+    float default_distance = 2;           // 默认视距
+    float field_of_view = 3;              // 镜头视野检测
+    ViewpointOffset viewpoint_offset = 4; // 视点偏移
+    float min_distance = 5;               // 视距范围最小值
+    float max_distance = 6;               // 视距范围最大值
+    uint32 camera_mode = 12;              // 模式
+    bool follow_rotation = 13;            // 视点跟随旋转
+    float field_14 = 14;                  // 未知字段
+    float min_horizontal_angle = 15;      // 水平角度范围最小值
+    float max_horizontal_angle = 16;      // 水平角度范围最大值
+    float min_pitch_angle = 17;           // 俯仰角度范围最小值
+    float max_pitch_angle = 18;           // 俯仰角度范围最大值
+    float ignore_collision = 19;          // 忽略镜头碰撞
+    float horizontal_angle = 20;          // 水平角度
+}
+
+// 视点偏移
+message ViewpointOffset {
+    float x = 1;                          // X轴偏移
+    float y = 2;                          // Y轴偏移
+    float z = 3;                          // Z轴偏移
+}
