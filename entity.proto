@@ -83,6 +83,7 @@ message Component {
         bytes field_22 = 22;                        // 未知 (property_type=12)
         bytes field_27 = 27;                        // 未知 (property_type=17)
         bytes field_29 = 29;                        // 未知 (property_type=19)
+        AppearanceComponent appearance = 32;        // 外观/颜色组件 (property_type=22)
     }
 
     enum ComponentType {
@@ -91,6 +92,7 @@ message Component {
         PRESET_STATE = 2;
         BASIC_COMBAT = 7;
         NODE = 11;
+        APPEARANCE = 22;
     }
 }
 
@@ -170,4 +172,15 @@ message NodeInfo {
     string description = 502;        // 描述 ("中心原点")
     int32 field_504 = 504;           // 未知 (值为1)
     string name = 505;               // 节点名称 ("RootNode")
+}
+
+// 外观/颜色组件
+message AppearanceComponent {
+    int32 custom_color_enabled = 1;   // 自定义颜色开关 (1=开启, 缺省=关闭)
+    bool override_decoration = 2;     // 覆盖装饰物颜色 (true=是, 缺省=否)
+    uint32 main_color = 3;            // 主颜色 0xAARRGGBB (alpha=不透明度0-255)
+    float opacity_percent = 4;        // 不透明度百分比 (由alpha派生, =alpha/255*100)
+    uint32 node_graph_color = 5;      // 节点图颜色码 0x00RRGGBB (由颜色RGB派生)
+    int32 blend_mode = 6;             // 颜色叠加模式 (6700=覆盖, 6701=正片叠底)
+    int32 decoration_param = 9;       // 装饰物参数 (仅override=true时出现, 恒为6710)
 }
